@@ -1,0 +1,24 @@
+#coding=utf-8
+'''
+Created on 2020-06-24
+
+@author: gat runner
+'''
+import sys
+sys.path.append(r'{ROOTDIR}')
+import pytest
+import allure
+from Gat.executor.Stepcaseexcutor import Stepcaseexcutor
+from Gat.util.classtracer import ClassMsgTracer
+
+@ClassMsgTracer(r"==========Test start==========")
+class {CLASSNAME}():
+    project_path = r'{PROJECTNAME}'
+    case_filepath = r'{CASEFILENAME}'
+{TESTMETHODS}
+        
+
+
+if __name__ == "__main__":
+    #import sys;sys.argv = ['', 'Test.testName']
+    pytest.main(['-s', '-q', '{PYFILENAME}'])

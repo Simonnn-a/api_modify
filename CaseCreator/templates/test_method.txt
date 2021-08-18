@@ -1,0 +1,6 @@
+    def test_{TESTMETHOD}(self, cleanValue={CLEANVALUE}):
+        executor=Stepcaseexcutor(self.project_path, self.case_filepath, "{CASEID}")
+        executor.execute(cleanValue)
+        
+    
+        

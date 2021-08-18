@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<StepParametersList>
+    <StepParameter ID="get_mgmt_querysuccess" StepName="get_mgmt_querysuccess">
+        <Parameters>
+            <appId>18</appId>
+            <signUpCourseYear>2021</signUpCourseYear>
+            <signUpCourseCode>18</signUpCourseCode>
+<!--            <signUpCourseTerm>607</signUpCourseTerm>-->
+            <userId>4400357</userId>
+<!--            <userState>1</userState>-->
+        </Parameters>
+        <Expect>
+            <code>0</code>
+            <result>
+                <items-0>
+                    <userId>4400357</userId>
+                    <appId>18</appId>
+                </items-0>
+            </result>
+        </Expect>
+    </StepParameter>
+</StepParametersList>

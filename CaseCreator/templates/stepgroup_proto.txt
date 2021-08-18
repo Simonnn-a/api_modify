@@ -1,0 +1,69 @@
+# coding:utf-8
+from ihuman_common import pbReqHelper,getPbParam,pbProjectHelper
+from Gat.util.dichelper import DictHelper
+from google.protobuf.json_format import MessageToDict
+from Gat.util.stepvaluepool import StepValuePool
+import allure
+from Gat.util.parameterHelper import ParameterHelper
+from Gat.util.assertHelper import AssertHelper
+from ihuman_common.pbReqHelper import pb2packet
+from projects.{project_name}.common import get_random_platform_and_channel
+from projects.{project_name}.proto.message_pb2 import Server
+from projects.{project_name}.proto import HeadType
+from projects.{project_name} import config
+import random
+import time
+
+
+class {class_name}:
+    @allure.step("识字-查询阅读数据")
+    def {messthod_name}(self, parameterID):
+        stepParameters = ParameterHelper.getStepParameters(parameterID)
+        parameters = stepParameters["Parameters"]
+        valuepool = StepValuePool()
+        cmd = getattr(HeadType, stepParameters["Req_type"])
+        print("******cmd: %s" % cmd)
+        chead = getPbParam.get_pb_Chead(parameters)
+        chead.roleid = valuepool.get_value("roleid")
+
+        if chead.channel != "xiaomiott":
+            chead.platform, chead.channel = get_random_platform_and_channel()
+
+        if chead.appversion == "low":
+            chead.appversion = random.choice(config.low_app_version)
+
+        print("***chead",chead)
+        cbody = getPbParam.get_pb_Cbody(parameters)
+        cbody.account.userid = int(valuepool.get_value("uid"))
+        cbody.account.deviceid = valuepool.get_value("deviceid").encode("utf-8")
+        cbody.account.session.value = valuepool.get_value("session")
+        cbody.crole.roleid = valuepool.get_value("roleid")
+        cbody.crole.rsid = valuepool.get_value("crole").rsid
+
+        binfo_pac = pb2packet(chead, cbody, cmd, cbody.account.userid)
+        random_port = random.choice(config.PORT_LIST)
+        rsp_type, hmsg, binfo_rsp = pbReqHelper.get_sock_rsp(config.SERVER, random_port, binfo_pac)
+
+        bmsg = Server()
+        bmsg.ParseFromString(binfo_rsp)
+        rsp_dic = MessageToDict(bmsg)
+
+        print("=====rsp_dic=========")
+        print(rsp_dic)
+        print("=====rsp_dic=========")
+
+        if "Rsp_type" in stepParameters:
+            Rsp_type = stepParameters["Rsp_type"]
+            rsp_type_str = pbProjectHelper.get_headType_by_num(rsp_type)
+            assert rsp_type == getattr(HeadType, Rsp_type), "预期响应type为{}，实际为{}".format(Rsp_type, rsp_type_str)
+            if Rsp_type == "APP_ROLE_GET_BOOKS_SUCCESS":
+                valuepool.put_value("book", rsp_dic["gameinfo"]["book"])
+        if stepParameters["Expect"] != None:
+            expected_dic = DictHelper.paramstr2dic(stepParameters["Expect"])
+            exp_dic = expected_dic["Server"]
+            try:
+                if exp_dic["error"]["code"]:
+                    exp_dic["error"]["code"] = getattr(HeadType, exp_dic["error"]["code"])
+            except:
+                pass
+            AssertHelper.assert_dict_contain_after_logging(exp_dic,rsp_dic)

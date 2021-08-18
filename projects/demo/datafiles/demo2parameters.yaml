@@ -1,0 +1,22 @@
+StepParametersList:
+  StepParameter:
+    - ID: "demo_pre_login_mobile_166"
+      Parameters:
+        course_id: 62
+        assignee_id: harry
+        big_class_ids: 260
+        app_id: 18
+      Expect:
+        code: 0
+        result:
+          id: 62
+    - ID: "crm_course_detailSuccess"
+      Parameters:
+#        course_id: 62
+#        assignee_id: harry
+#        big_class_ids: 260
+#        app_id: 18
+      Expect:
+        code: 0
+        result:
+          id: 62

@@ -1,0 +1,26 @@
+TestCaseList:
+  StepParametersFileName: crm_course_detailparameters.xml
+  StepPackage: projects.middle_platform.crm.stepgroups
+  StepModule: crm_course_detail2
+  StepGroup: Coursedetail
+  path: /course/detail
+  http_method: post
+  StepsTemplate:
+    - Name: "测试成功查询到课程详情"
+      ID: "01_crm_course_detailsuccess"
+      CaseTag: "P1"
+      Owner: "jiangzeyu"
+      TearDown:
+      SetUp:
+      TestSteps:
+        Step:
+          - StepPackage: "projects.demo1.stepgroups"
+            StepModule: "demoPreLogin_step"
+            StepGroup: "DemoPreLoginStep"
+            StepName: "demoPreLoginSucStep"
+            StepParametersFileName: "demo1/demopreloginparameters.xml"
+            StepParameterID: "demo_pre_login_mobile_166"
+          - StepName: "crm_course_detailSuccess"
+            StepParameterID: "crm_course_detailSuccess"
+          - StepName: "crm_course_detailSuccess"
+            StepParameterID: "crm_course_detailSuccess"

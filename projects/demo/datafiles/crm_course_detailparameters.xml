@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<StepParametersList>
+    <StepParameter ID="crm_course_detailSuccess" StepName="crm_course_detailSuccess">
+        <Parameters>
+            <course_id>62</course_id>
+            <assignee_id>harry</assignee_id>
+            <big_class_ids-0>260</big_class_ids-0>
+            <app_id>18</app_id>
+        </Parameters>
+        <Expect>
+            <code>0</code>
+            <result>
+                <id>62</id>
+                <start_time>2021-07-14 00:00:00</start_time>
+                <class_ids-0>260</class_ids-0>
+            </result>
+        </Expect>
+    </StepParameter>
+
+    <StepParameter ID="crm_course_detail_All_value_empty" StepName="crm_course_detail_All_value_empty">
+        <Parameters>
+        </Parameters>
+        <Expect>
+            <code>1001</code>
+        </Expect>
+    </StepParameter>
+</StepParametersList>
