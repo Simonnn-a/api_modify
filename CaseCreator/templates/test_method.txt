@@ -1,4 +1,6 @@
     def test_{TESTMETHOD}(self, cleanValue={CLEANVALUE}):
+        Log_path=Logger_Path_Confirm(self.project_path)
+        Log_path.logger_path_confirm()
         executor=Stepcaseexcutor(self.project_path, self.case_filepath, "{CASEID}")
         executor.execute(cleanValue)
         

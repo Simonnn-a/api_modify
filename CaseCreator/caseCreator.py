@@ -52,6 +52,7 @@ class Casecreator:
         testcases_path = project_path + dir_slash + "testcases"
         # logtmp_folder = project_path + dir_slash + "logtmp"
         project_log_path = project_path + dir_slash + "log"
+        project_logconf_path = project_path + dir_slash + "log" +dir_slash + "logger.conf"
         # testcases_log_path = testcases_path + dir_slash + "log"
         stepgroup_path = project_path + dir_slash + 'stepgroups'
         if os.path.exists(testcases_path):
@@ -66,16 +67,18 @@ class Casecreator:
             stepgroup_path_init_file.close()
         if not os.path.exists(project_log_path):
             os.makedirs(project_log_path)
+        if not os.path.exists(project_logconf_path):
+            loggerconf_template = open(cls.conf.get('STATIC_VARIABLE', 'LOGGER_CONFIG_TEMPLATE_PATH'), mode='r',encoding="utf-8")
+            loggerconf_content = loggerconf_template.read()
+            loggerconf_content = loggerconf_content.replace('{log_folder}',project_log_path)
+            loggerconf_content = loggerconf_content.replace('{slash}', dir_slash)
+            loggerconf_template.close()
+            loogerconf_file = open(project_logconf_path, mode='w', encoding="utf-8")
+            loogerconf_file.write(loggerconf_content)
+            loogerconf_file.close()
+
         testcases_package_init_file = open(testcases_path+dir_slash+init_py_file_name,"w")
         testcases_package_init_file.close()
-    # def get_suffix(cls,datafiles_path):
-    #     global suffix
-    #     for datafile in os.listdir(datafiles_path):
-    #         if datafile.endswith(".xml"):
-    #             suffix = ".xml"
-    #         elif datafile.endswith(".yaml"):
-    #             suffix = ".yaml"
-    #         return suffix
 
     def fuzzyfinder(cls,user_input, collection):
         suggestions = []
@@ -233,16 +236,6 @@ class Casecreator:
         runpy_template.close()
         return runpy_content
 
-    def create_loggerconf(cls):
-        loggerconf_template = open(cls.conf.get('STATIC_VARIABLE','LOGGER_CONFIG_TEMPLATE_PATH'), mode='r', encoding="utf-8")
-        loggerconf_content = loggerconf_template.read()
-        loggerconf_content = loggerconf_content.replace('{log_folder}', cls.conf.get('STATIC_VARIABLE','LOG_PATH'))
-        loggerconf_content = loggerconf_content.replace('{slash}', dir_slash)
-        loggerconf_template.close()
-        loogerconf_file = open(cls.conf.get('STATIC_VARIABLE','LOG_PATH'), mode='w', encoding="utf-8")
-        loogerconf_file.write(loggerconf_content)
-        loogerconf_file.close()
-
     def generate_stepgroups(cls,project_path):
         stepgroup_path = project_path + dir_slash + 'stepgroups'
         datafiles_path = project_path + dir_slash + 'datafiles'
@@ -280,7 +273,6 @@ class Casecreator:
             configfile.close()
 
 if __name__ == '__main__':
-    Casecreator().create_loggerconf()
     print("*" * 50)
     Casecreator().create_global_runpy()
     projectpath_list = Casecreator().get_projectpath_list()
@@ -290,6 +282,3 @@ if __name__ == '__main__':
         Casecreator().generate_testcase(project_path)
         Casecreator().generate_stepgroups(project_path)
         Casecreator().generate_config(project_path)
-    # testcase={'Name': '这是name3', 'ID': None, 'CaseTag': None, 'TestSteps': {'Step': {'StepName': None, 'StepParameterID': None}}, 'StepParametersFileName': 'crm_course_detailparameters.xml', 'StepPackage': 'projects.middle_platform.crm.stepgroups', 'StepModule': 'crm_course_detail', 'StepGroup': 'Coursedetail'}
-    #
-    # Casecreator().create_testmethod_content(testcase)

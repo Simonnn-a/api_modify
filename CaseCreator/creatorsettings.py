@@ -20,7 +20,7 @@ class CreatorSettings:
     @classmethod
     def __init__(cls):
         conf = configparser.ConfigParser()
-        conf.read("../config/server.ini")
+        conf.read('../config/server.ini')
         cls.conf=conf
 
     def get_testcase_filepath(cls,projectname, filename):
@@ -29,6 +29,7 @@ class CreatorSettings:
 
     def get_parameter_filepath(cls,projectpath, filename):
         return projectpath+get_slash()+"datafiles"+get_slash()+filename
+
 # if __name__ == '__main__':
 #     # CreatorSettings().get_testcase_filepath('crm','demo1testcases.xml')
 

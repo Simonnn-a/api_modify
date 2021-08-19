@@ -9,6 +9,7 @@ sys.path.append(r'{ROOTDIR}')
 import pytest
 import allure
 from Gat.executor.Stepcaseexcutor import Stepcaseexcutor
+from Gat.executor.loggerpath_confirm import Logger_Path_Confirm
 from Gat.util.classtracer import ClassMsgTracer
 
 @ClassMsgTracer(r"==========Test start==========")
