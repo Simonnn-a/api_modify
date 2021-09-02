@@ -1,10 +1,10 @@
 StepParametersList:
   StepParameter:
-    - ID: "crm_course_lesson_detailSuccess"
+    - ID: crm_course_detailSuccess_dev
       Parameters:
         course_id: 62
         assignee_id: harry
-        big_class_ids: 260
+        big_class_ids: [260]
         app_id: 18
       Expect:
         code: 0

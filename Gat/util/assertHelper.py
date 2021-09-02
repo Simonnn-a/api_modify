@@ -2,6 +2,9 @@
 # @Author : jzy
 # @Time :  2021/8/18 10:27
 # @File : assertHelper.py
+from Gat.util.methodtracer import traceFrameMessage
+
+
 class AssertHelper:
 
     @staticmethod
@@ -47,6 +50,12 @@ class AssertHelper:
                 assert src_data in dst_data, "value '{}' not in '{}'".format(src_data, dst_data)
             else:
                 assert src_data == dst_data, "value '{}' != '{}'".format(src_data, dst_data)
+
+    @staticmethod
+    def assert_dict_contain_after_logging(src_data, dst_data):
+        traceFrameMessage("Expected Result: {}".format(src_data))
+        traceFrameMessage("Actual Result: {}".format(dst_data))
+        return AssertHelper.assert_dict_contain(src_data, dst_data)
 
 if __name__ == "__main__":
     xx = {"222":{"44":{"66":[{"333": 555},{"555": 666}]}}}

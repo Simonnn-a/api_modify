@@ -1,7 +1,8 @@
 venv
-projects/crm
+projects/middle_platform/crm
 .pytest_cache
 testcases
 stepgroups
 log
 config.py
+run.py

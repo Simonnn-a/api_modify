@@ -2,6 +2,8 @@
 # @Author : jzy
 # @Time :  2021/7/21 14:28
 # @File : yamlhelp.py
+import json
+
 import yaml
 import re
 class YamlHelp:
@@ -9,7 +11,7 @@ class YamlHelp:
     def __init__(cls,yamlfilepath):
         with open(yamlfilepath,encoding="utf-8") as yaml_file:
             data=yaml_file.read()
-            data_dict=yaml.load(data,Loader=yaml.FullLoader)
+            data_dict=yaml.safe_load(data)
         cls.root_dict=data_dict
 
 
@@ -42,6 +44,7 @@ class YamlHelp:
             stepParameters[tab] = {}
 
     def get_stepParameters4yaml(cls, parameterID):
+        # print(cls.root_dict)
         stepParameter_list = cls.root_dict["StepParametersList"]["StepParameter"]
         if not isinstance(stepParameter_list,list):
             stepParameter_list=[stepParameter_list]

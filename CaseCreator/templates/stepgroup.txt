@@ -9,17 +9,19 @@ self.url需要自行补充！！！！！！
 其他参数可以根据需求修改
 
 """
-import allure
+import os
 import json
 import requests
 from Gat.util.assertHelper import AssertHelper
-from projects.{project_name} import config
 from Gat.util.stepvaluepool import StepValuePool
 from Gat.util.parameterHelper import ParameterHelper
+from Gat.util.iniConfirmhelper import get_ini
+
+ini_path=r'{ini_path}'
 class {class_name}():
     def __init__(self):
-        self.url=config.URL+'{path}'
-        self.header = config.header
+        self.url=get_ini(ini_path,"url")+'{path}'
+        self.header = json.loads(get_ini(ini_path,'header'))
     def {messthod_name}Success(self,parameterID):
         stepParameters = ParameterHelper.getStepParameters(parameterID)
         parameters = stepParameters['Parameters']

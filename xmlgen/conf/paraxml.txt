@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<StepParametersList>
+    <StepParameter ID="{module}Success" StepName="{module}Success">
+        <Parameters>
+
+        </Parameters>
+        <Expect>
+            <code>0</code>
+            <result>
+
+            </result>
+        </Expect>
+    </StepParameter>
+
+    <StepParameter ID="{module}_All_value_empty" StepName="{module}_All_value_empty">
+        <Parameters>
+        </Parameters>
+        <Expect>
+            <code>1002</code>
+            <message>缺少必要的参数！->app_id</message>
+        </Expect>
+    </StepParameter>
+</StepParametersList>

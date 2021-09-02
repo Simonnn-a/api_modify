@@ -12,10 +12,13 @@ from Gat.executor.Stepcaseexcutor import Stepcaseexcutor
 from Gat.executor.loggerpath_confirm import Logger_Path_Confirm
 from Gat.util.classtracer import ClassMsgTracer
 
+project_path = r'{PROJECTNAME}'
+case_filepath = r'{CASEFILENAME}'
+Log_path=Logger_Path_Confirm(project_path)
+Log_path.logger_path_confirm()
+
 @ClassMsgTracer(r"==========Test start==========")
 class {CLASSNAME}():
-    project_path = r'{PROJECTNAME}'
-    case_filepath = r'{CASEFILENAME}'
 {TESTMETHODS}
         
 

@@ -5,11 +5,11 @@
 import io
 import os
 import sys
-from CaseCreator.creatorsettings import get_slash
+from settings import GlobalConfig
 # print(os.path.dirname(os.path.abspath(__file__)))
 
 def generate_server_ini():
-    slash=get_slash()
+    slash=GlobalConfig.get_slash()
     root_dir = os.path.dirname(os.path.abspath(__file__))
     templates_path = root_dir + slash + "CaseCreator" +slash+ "templates" +slash + "server.txt"
     ini_path = root_dir + slash + "config" + slash + "server.ini"

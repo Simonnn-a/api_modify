@@ -2,12 +2,13 @@
 # @Author : jzy
 # @Time :  2021/7/30 16:55
 # @File : TemplatesHelper.py
-def HTTP_helper(test_dict,stepgroup_content,currentproject_name):
+def HTTP_helper(test_dict,stepgroup_content,currentproject_name,ini_path):
 
     clean_value = True
     stepgroup_content = stepgroup_content.replace('{class_name}',test_dict["StepGroup"])
     stepgroup_content = stepgroup_content.replace('{messthod_name}', test_dict["StepModule"])
     stepgroup_content = stepgroup_content.replace('{project_name}', currentproject_name)
+    stepgroup_content = stepgroup_content.replace('{ini_path}', ini_path)
     if 'http_method' in test_dict:
         stepgroup_content = stepgroup_content.replace('{http_method}',test_dict['http_method'])
         if test_dict['http_method'] == 'post':

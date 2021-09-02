@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<TestCaseList>
+    <StepParametersFileName>{para_name}</StepParametersFileName>
+    <StepPackage>{package}</StepPackage>
+    <StepModule>{module}</StepModule>
+    <StepGroup>{group}</StepGroup>
+    <path>{path}</path>
+    <http_method>{method}</http_method>
+     <TestCase Name="01_{module}success" ID="01_{module}success" CaseTag="P1" Owner="jzy">
+         <Desc>该case针对成功{DESC}的情况</Desc>
+         <TestSteps>
+             <Step StepName="{module}Success" StepParameterID="{module}Success"/>
+         </TestSteps>
+     </TestCase>
+
+     <TestCase Name="02_{module}Nonevlaue" ID="02_{module}Nonevlaue" CaseTag="P1" Owner="jzy">
+         <Desc>该case针对传参数全为空的情况</Desc>
+         <TestSteps>
+             <Step StepName="{module}Faild" StepParameterID="{module}_All_value_empty"/>
+         </TestSteps>
+     </TestCase>
+</TestCaseList>

@@ -1,9 +1,7 @@
-# -*- coding=utf-8 -*-
-# @Author : jzy
-# @Time :  2021/8/5 15:41
-# @File : methodinvoker.py
+from Gat.util.methodtracer import traceFrameMessage
 
-class MethodInvoker:
+
+class MethodInvoker(object):
     """
     动态调用方法
     """
@@ -11,8 +9,9 @@ class MethodInvoker:
     def get_instance(moudelname,classname,packagelist):
         moudel=__import__(moudelname,fromlist=packagelist)
         klass = getattr(moudel,classname)
-        instance = klass
-        # traceFrameMessage()
+        instance = klass()
+        print(instance)
+        traceFrameMessage()
         return instance
 
     @staticmethod

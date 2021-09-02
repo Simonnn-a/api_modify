@@ -6,20 +6,25 @@ from Gat.util.XMLparsehelp import XmlParseHelp
 from Gat.util.yamlhelp import YamlHelp
 from Gat.util.stepvaluepool import StepValuePool
 from Gat.util.dichelper import DictHelper
+from settings import GlobalConfig
+
 
 class ParameterHelper():
 
     @staticmethod
     def getStepParameters(parameterID):
-        StepParameterFilePath=StepValuePool.get_value('StepParamsFilepath')
-        if StepParameterFilePath.endwith("yaml"):
-            allstr_stepParameters=XmlParseHelp(StepParameterFilePath).get_stepParameters4xml(parameterID)
+        StepParameterFilePath=GlobalConfig.StepParameterFilePath
+        print(StepParameterFilePath)
+        if StepParameterFilePath.endswith("yaml"):
+            stepParameters = YamlHelp(StepParameterFilePath).get_stepParameters4yaml(parameterID)
         else:
-            allstr_stepParameters=YamlHelp(StepParameterFilePath).get_stepParameters4yaml(parameterID)
-        single_layer_stepParameters=DictHelper.dicVstr2num(allstr_stepParameters)
-        stepParameters = DictHelper.paramstr2dic(single_layer_stepParameters)
-        stepParameters = DictHelper.convert_byte2str(stepParameters)
+            allstr_stepParameters = XmlParseHelp(StepParameterFilePath).get_stepParameters4xml(parameterID)
+            single_layer_stepParameters=DictHelper.dicVstr2num(allstr_stepParameters)
+            stepParameters = DictHelper.paramstr2dic(single_layer_stepParameters)
+            stepParameters = DictHelper.convert_byte2str(stepParameters)
         # traceFrameMessage("stepParameters: %s" % str(stepParameters), level="debug")
+        # print("stepParameters是：                 ")
+        # print(stepParameters)
         return stepParameters
 
     @staticmethod

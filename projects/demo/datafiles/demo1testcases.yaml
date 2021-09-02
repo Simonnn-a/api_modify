@@ -1,7 +1,7 @@
 TestCaseList:
-  StepParametersFileName: crm_course_detailparameters.xml
-  StepPackage: projects.middle_platform.crm.stepgroups
-  StepModule: crm_course_detail
+  StepParametersFileName: demo1parameters.yaml
+  StepPackage: projects.demo.stepgroups
+  StepModule: demo01
   StepGroup: Coursedetail
   path: /course/detail
   http_method: post
@@ -10,14 +10,11 @@ TestCaseList:
       ID: "01_crm_course_detailsuccess"
       CaseTag: "P1"
       Owner: "jiangzeyu"
+      Env: "dev"
       TestSteps:
         Step:
-          - StepName: "crm_course_detailSuccess"
-            StepParameterID: "crm_course_detailSuccess"
-          - StepName: "crm_course_detailSuccess"
-            StepParameterID: "crm_course_detailSuccess"
-          - StepName: "crm_course_detailSuccess"
-            StepParameterID: "crm_course_detailSuccess"
+          - StepName: "demo01Success"
+            StepParameterID: "crm_course_detailSuccess_dev"
 
     - Name: "拥有StepsTemplate的testcase"
       ID: "loginSuc"
